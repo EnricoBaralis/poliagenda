@@ -1,18 +1,27 @@
 class Event:
     def __init__(self, title, date, description):
+        self.title = title
+        self.date = date
+        self.description = description
 
     def __str__(self):
+        return f"Title: {self.title}, Date: {self.date}, Description: {self.description}"
 
 
 class Agenda:
     def __init__(self):
-
+        self.events = []
 
     def add_event(self, title, date, description):
+        event = Event(title, date, description)
+        self.events.append(event)
 
     def remove_event(self, title):
+        self.events = [event for event in self.events if event.title != title]
 
     def list_events(self):
+        for event in self.events:
+            print(event)
 
 
 if __name__ == "__main__":
@@ -40,8 +49,16 @@ if __name__ == "__main__":
         choice = input("Enter your choice: ")
 
         if choice == "1":
+            title = input("Enter the title of the event: ")
+            date = input("Enter the date of the event: ")
+            description = input("Enter the description of the event: ")
+            agenda.add_event(title, date, description)
         elif choice == "2":
+            title = input("Enter the title of the event to remove: ")
+            agenda.remove_event(title)
         elif choice == "3":
+            print("Listing all events:")
+            agenda.list_events()
         elif choice == "4":
             break
         else:
